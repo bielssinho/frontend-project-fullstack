@@ -2,6 +2,7 @@ import { ReactNode, createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../services/api'
 import { LoginData } from '../pages/login/validator'
+import { toast } from 'react-toastify'
 
 interface AuthProviderProps {
     children: ReactNode
@@ -37,11 +38,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             const { token } = response.data
 
             api.defaults.headers.common.authorization = `Bearer ${token}`
-            localStorage.setItem("your-todolist:token", token)
+            localStorage.setItem("your-contacts:token", token)
 
             navigate('dashboard')
         } catch (error) {
-            console.error(error)
+            () => toast.error('Ops! Algo deu errado')
         }
     }
 

@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 import { LoginData, schema } from './validator'
 import { useAuth } from '../../hooks/useAuth'
 import { ToastContainer } from 'react-toastify'
+import { Button, Container, Form, Input, Label, Title } from './styles'
+import { StyledLink } from '../register/styles'
 
 const Login = () => {
     const { signIn } = useAuth();
@@ -11,19 +13,19 @@ const Login = () => {
     })
 
     return (
-        <main>
-            <h2>Login</h2>
+        <Container>
+            <Title>Login</Title>
 
-            <form onSubmit={handleSubmit(signIn)}>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" {...register('email')} />
+            <Form onSubmit={handleSubmit(signIn)}>
+                <Label htmlFor="email">Email</Label>
+                <Input type="email" id="email" {...register('email')} />
 
-                <label htmlFor="password">Senha</label>
-                <input type="password" id="password" {...register('password')} />
+                <Label htmlFor="password">Senha</Label>
+                <Input type="password" id="password" {...register('password')} />
 
-                <button type="submit">Entrar</button>
-            </form>
-
+                <Button type="submit">Entrar</Button>
+            </Form>
+            <StyledLink to={'/register'}>Register Page</StyledLink>
             <ToastContainer
                 position="bottom-right"
                 autoClose={5000}
@@ -36,7 +38,7 @@ const Login = () => {
                 pauseOnHover
                 theme="dark"
             />
-        </main>
+        </Container>
     )
 }
 

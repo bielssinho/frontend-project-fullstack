@@ -20,7 +20,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const token = localStorage.getItem("your-contacts:token")
+        const token = localStorage.getItem('your-user:token')
 
         if (!token) {
             setLoading(false)
@@ -33,12 +33,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const signIn = async (data: LoginData) => {
         try {
-            const response = await api.post("/login", data)
+            const response = await api.post('login', data)
 
-            const { token } = response.data
+            const { token } = response.data.token
+            const { userId } = response.data.token
 
             api.defaults.headers.common.authorization = `Bearer ${token}`
-            localStorage.setItem("your-contacts:token", token)
+            localStorage.setItem('your-user:token', token)
+            localStorage.setItem('your-user:id', userId)
 
             navigate('dashboard')
         } catch (error) {

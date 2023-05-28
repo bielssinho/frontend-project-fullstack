@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { RegisterData, schema } from './validator'
 import { useRegister } from '../../hooks/useRegister'
 import { ToastContainer } from 'react-toastify'
+import { Button, Container, Form, Input, Label, StyledLink, Title } from './styles'
 
 const Register = () => {
     const { onSubmitRegister } = useRegister();
@@ -11,27 +12,29 @@ const Register = () => {
     })
 
     return (
-        <main>
-            <h2>Cadastro</h2>
+        <Container>
+            <Title>Cadastro</Title>
 
-            <form onSubmit={handleSubmit(onSubmitRegister)}>
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" {...register('name')} />
+            <Form onSubmit={handleSubmit(onSubmitRegister)}>
+                <Label htmlFor="name">Name</Label >
+                <Input type="text" id="name" {...register('name')} />
 
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" {...register('email')} />
+                <Label htmlFor="email">Email</Label >
+                <Input type="email" id="email" {...register('email')} />
 
-                <label htmlFor="cellphone">Cellphone</label>
-                <input type="text" id="cellphone" {...register('cellphone')} />
+                <Label htmlFor="cellphone">Cellphone</Label >
+                <Input type="text" id="cellphone" {...register('cellphone')} />
 
-                <label htmlFor="password">Senha</label>
-                <input type="password" id="password" {...register('password')} />
+                <Label htmlFor="password">Senha</Label >
+                <Input type="password" id="password" {...register('password')} />
 
-                <label htmlFor="profileImage">Profile Image</label>
-                <input type="url" id="profileImage" {...register('profileImage')} />
+                <Label htmlFor="profileImage">Profile Image</Label >
+                <Input type="url" id="profileImage" {...register('profileImage')} />
 
-                <button type="submit">Entrar</button>
-            </form>
+                <Button type="submit">Cadastrar</Button >
+
+            </Form >
+            <StyledLink to={'/'}>Login Page</StyledLink>
 
             <ToastContainer
                 position="bottom-right"
@@ -45,7 +48,7 @@ const Register = () => {
                 pauseOnHover
                 theme="dark"
             />
-        </main>
+        </Container>
     )
 }
 

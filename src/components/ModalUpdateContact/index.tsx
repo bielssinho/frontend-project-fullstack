@@ -36,6 +36,8 @@ export const ModalUpdateContact = ({ toggleModal, setContacts, contact, contacts
             setContacts(contacts)
         }
 
+        window.location.reload()
+
         toggleModal()
     }
 

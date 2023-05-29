@@ -1,26 +1,32 @@
-import { Dispatch, SetStateAction } from "react"
-import { CreateContactData, schema } from "./validator"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { api } from "../../services/api"
-import { Modal } from "../Modal"
-import { Contacts } from "../../pages/dashboard"
+import { Dispatch, SetStateAction } from 'react'
+import { schema } from './validator'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { api } from '../../services/api'
+import { Modal } from '../Modal'
+import { Contacts } from '../../pages/dashboard'
 
 interface ModalAddTaskProps {
     toggleModal: () => void
     setContacts: Dispatch<SetStateAction<Contacts[]>>
 }
 
+interface ContactsReq {
+    contactName: string
+    contactEmail: string
+    contactCellphone: string
+}
+
 export const ModalAddContact = ({ toggleModal, setContacts }: ModalAddTaskProps) => {
-    const { register, handleSubmit } = useForm<CreateContactData>({
+    const { register, handleSubmit } = useForm<ContactsReq>({
         resolver: zodResolver(schema)
     })
 
-    const createContact = async (data: CreateContactData) => {
-        console.log('oi')
+    const createContact = async (data: ContactsReq) => {
+
         const response = await api.post<Contacts>('contact', data)
-        console.log(response)
-        setContacts(previousContact => [response.data, ...previousContact])
+
+        setContacts(previousContact => [...previousContact, response.data])
         toggleModal()
     }
 
@@ -36,7 +42,7 @@ export const ModalAddContact = ({ toggleModal, setContacts }: ModalAddTaskProps)
                 <label htmlFor="contactCellphone">Cellphone</label>
                 <input type="text" id="contactCellphone" {...register('contactCellphone')} />
 
-                <button type="submit">Cadastro</button>
+                <button type="submit">Cadastrar</button>
             </form>
         </Modal>
     )

@@ -3,6 +3,7 @@ import { api } from '../../services/api'
 import { Card } from '../../components/Card'
 import { Contacts, Container, Header, Main } from './styles'
 import { ModalAddContact } from '../../components/ModalAddContacts'
+import { Button } from '../login/styles'
 
 
 export interface Contacts {
@@ -57,11 +58,11 @@ const Dashboard = () => {
                 <Contacts>
                     <ul>
                         {
-                            contacts.map(contact => <Card key={contact.id} contact={contact} />)
+                            contacts.map(contact => <Card key={contact.id} id={contact.id} contact={contact} contacts={contacts} setContacts={setContacts} />)
                         }
                     </ul>
                 </Contacts>
-                <button type="button" onClick={toggleModal}>New Contact</button>
+                <Button type="button" onClick={toggleModal}>New Contact</Button>
                 {
                     isOpenModal && <ModalAddContact toggleModal={toggleModal} setContacts={setContacts} />
                 }

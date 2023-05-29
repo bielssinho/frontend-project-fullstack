@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { MdOutlineDelete } from 'react-icons/md';
+import { MdUpdate } from 'react-icons/md';
 
 const Container = styled.div`
   background-color: var(--color-gray-800);
@@ -23,6 +25,29 @@ const Container = styled.div`
     font-size: 14px;
     margin-bottom: 4px;
   }
+
+  div {
+    display: flex;
+    gap: 1rem;
+  }
 `;
 
-export { Container }
+const DeleteIcon = styled(MdOutlineDelete)`
+  color: var(--color-gray-100);
+  cursor: pointer;
+
+  :hover {
+    color: var(--color-purple-800);
+  }
+`;
+
+const UpdateIcon = styled(MdUpdate)`
+  color: var(--color-gray-100);
+  cursor: pointer;
+
+  :hover {
+    color: var(--color-purple-800);
+  }
+`;
+
+export { Container, DeleteIcon, UpdateIcon }

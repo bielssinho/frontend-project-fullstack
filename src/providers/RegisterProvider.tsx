@@ -2,7 +2,7 @@ import { ReactNode, createContext } from 'react'
 import { api } from '../services/api.js'
 import { useNavigate } from 'react-router-dom'
 import { RegisterData } from '../pages/register/validator.js'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
 
 interface ResgisterProviderProps {
     children: ReactNode
@@ -18,13 +18,17 @@ const RegisterProvider = ({ children }: ResgisterProviderProps) => {
     const navigate = useNavigate();
 
     const onSubmitRegister = async (data: RegisterData) => {
-        await api.post('users', data)
-            .then((response) => {
-                if (response.statusText === 'Created') {
-                    navigate('/')
-                }
-            })
-            .catch(() => toast.error('Ops! Algo deu errado'))
+
+        try {
+            const response = await api.post('users', data)
+
+            if (response.status === 201) {
+                navigate('/')
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
